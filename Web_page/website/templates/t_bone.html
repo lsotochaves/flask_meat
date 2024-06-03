@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+<title>{% block title %}T-Bone{% endblock %}</title>
+
+
+
+
+{% block contents_store %}
+<section class="py-5">
+    <div class="container px-4 px-lg-5 my-5">
+        <div class="row gx-4 gx-lg-5 align-items-center">
+            <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" src="{{url_for('static', filename= 'images/tbone_main.jpg')}}" alt="..." /></div>
+            <div class="col-md-6">
+                <div class="small mb-1">SKU: BST-498</div> <!--CAMBIAR!-->
+                <h1 class="display-5 fw-bolder">T-Bone</h1> <!--CAMBIAR!-->
+                <div class="fs-5 mb-5">
+                    {% if products %}
+                        <span>₡ {{ "{:,.2f}".format(products[0].base_cost_per_kilogram) }} por kilogramo</span>
+                    {% endif %}
+                </div>
+                <p class="lead"><strong>Forma sugerida de cocinar:</strong> Sellar a alta temperatura en la parrilla y dejar cocinar en calor indirecto hasta llegar a término medio. Dejar reposar luego de terminar la cocción.</p>
+                <p class="lead"><strong>Otra forma de cocinar:</strong> Precalentar el horno a 215°C. Sellar a alta temperatura en un sartén que retenga bien la temperatura y mover al horno (se puede añadir hierbas deseadas). Cocinar hasta que alcance la temperatura deseada y dejar reposar al menos 5 minutos.
+                    {% if products %}
+                        <form method="post" action="{{ url_for('cart.add_to_cart') }}">
+                            <div class="d-flex">
+                                <select class="form-control text-center me-3" name="product_id" style="max-width: 17rem">
+                                    {% for product in products %}
+                                        <option value="{{ product.id }}">{{ product.weight }} kg Precio total: ₡ {{ "{:,.2f}".format(product.total_cost) }}</option>
+                                    {% endfor %}
+                                </select>
+
+                                <button type="submit" class="btn btn-outline-dark flex-shrink-0">
+                                    <i class="bi-cart-fill me-1"></i>
+                                    Añadir al carrito
+                                </button>
+                            </div>
+                        </form>
+                    {% else %}
+                        <p>Lo sentimos, este producto no está disponible.</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </section>
+
+{%endblock%}

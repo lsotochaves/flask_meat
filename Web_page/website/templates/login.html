@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+<title>{% block title %}Ingreso- Carnes{% endblock %}</title>
+
+
+{% block contents_store %}
+<div style="width: 30%; margin: 0 auto;" class="mt-3">
+    <form method = "POST">
+        <h3 align="center">Ingreso</h3>
+        <div class="form-group">
+            <label for="email">Dirección de correo</label>
+            <input type="email" class="form-control" id="email" name="email" placeholder="Ingrese el correo" />
+        </div>
+
+        <div class="form-group">
+            <label for="password1">Contraseña</label>
+            <input type="password" class="form-control" id="password1" name="password1" placeholder="Ingrese su contraseña" />
+        </div>
+
+        <br />
+        <button type="submit" class="btn btn-primary">Ingresar</button>
+    </form>
+</div>
+{%endblock%}

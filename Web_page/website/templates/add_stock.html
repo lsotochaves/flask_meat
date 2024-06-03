@@ -1,0 +1,25 @@
+{% extends "admin.html" %}
+
+{% block title %}Add Stock{% endblock %}
+
+{% block contents_store %}
+<div style="display: flex; flex-direction: column; align-items: center;">
+    <h1 style="text-align: center; color: #333; font-size: 1.7em; margin-bottom: 10px; margin-top: 10px">Crear producto / Añadir al inventario</h1>
+    <form method="POST" action="{{ url_for('views.add_stock') }}" style="display: flex; flex-direction: column; width: 300px; margin: 0 auto;">
+        <label for="name" style="margin-bottom: 10px;">Producto a añadir</label>
+        <select id="name" name="name" style="margin-bottom: 20px; font-size: 1.2em; padding: 5px;">
+            <option value="ribeye">Ribeye</option>
+            <option value="picanha">Picaña (Punta de Solomo)</option>
+            <option value="skirt_steak">Skirt Steak (Entraña)</option>
+            <option value="nueva_york">Nueva York</option>
+            <option value="t_bone">T Bone</option>
+            <option value="tomahawk">Tomahawk</option>
+        </select>
+        <label for="weight" style="margin-bottom: 10px;">Peso en kilogramos</label>
+        <input id="weight" type="number" step="0.01" name="weight" placeholder="Peso en kilogramos" style="margin-bottom: 20px; font-size: 1.2em; padding: 5px;">
+        <label for="quantity" style="margin-bottom: 10px;">Cantidad</label>
+        <input id="quantity" type="number" name="quantity" placeholder="Cantidad" style="margin-bottom: 20px; font-size: 1.2em; padding: 5px;">
+        <button type="submit" style="padding: 10px; font-size: 1.2em;">Añadir al inventario</button>
+    </form>
+</div>
+{% endblock %}

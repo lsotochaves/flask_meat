@@ -1,0 +1,101 @@
+{% extends "admin.html" %}
+
+{% block title %}Delete Stock{% endblock %}
+
+{% block contents_store %}
+<style>
+    .table-container {
+        display: flex;
+        justify-content: center;
+        margin-top: 30px; /* Add space above the table */
+        margin-bottom: 30px; /* Add space below the table */
+    }
+    table {
+        width: 50%; /* Adjust this to change the table width */
+        border-collapse: collapse;
+        margin: auto; /* This will center the table */
+    }
+    th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: center; /* This centers the text */
+        min-height: 70px;
+    }
+    th {
+        background-color: #f2f2f2;
+        width: 20%; /* Adjust this to change the column width */
+    }
+    .submit-button {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+    }
+    
+</style>
+
+{% if products %}
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Nombre del Producto</th>
+                    <th>Peso</th>
+                    <th>Costo por kilogramo</th>
+                    <th>Costo total</th>
+                    <th>Cantidad</th>
+                    <th>Eliminar</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for product in products %}
+                    <tr>
+                        <td>
+                            {% if product.name == 'skirt_steak' %}
+                                Skirt Steak (Entraña)
+
+                            {% elif product.name == 'ribeye' %}
+                                Ribeye
+
+                            {% elif product.name == 'picanha' %}
+                                Picaña (Punta de Solomo)
+
+                            {% elif product.name == 'tomahawk' %}
+                                Tomahawk
+
+                            {% elif product.name == 'nueva_york'%}
+                                Nueva York
+
+                            {% elif product.name == 't_bone' %}
+                                T Bone
+
+                            {% else %}
+                                {{ product.name }}
+                            {% endif %}
+                        </td>
+                        <td><strong>{{ product.weight }} kg </strong></td>
+                        <td>₡{{ "{:,.2f}".format(product.base_cost_per_kilogram) }}</td>
+                        <td>₡{{ "{:,.2f}".format(product.total_cost) }}</td>
+                        <td> {{ product.quantity }}</td>
+                        <td> 
+                            <form method="POST" action="{{ url_for('views.delete_product') }}">
+                                <input type="hidden" name="product_id" value="{{ product.id }}">
+                                <button type="submit" style="background: none; border: none;">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                                    <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+                                    <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+                                </svg>
+                            </button>
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% else %}
+    <div style="text-align: center; padding: 20px; font-size: 1.5em;">
+        <p>No hay productos</p>
+    </div>
+{% endif %}
+
+{% endblock %}

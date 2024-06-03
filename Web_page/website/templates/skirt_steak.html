@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+<title>{% block title %}Skirt Steak{% endblock %}</title>
+
+
+
+{% block contents_store %}
+<section class="py-5">
+    <div class="container px-4 px-lg-5 my-5">
+        <div class="row gx-4 gx-lg-5 align-items-center">
+            <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" src="{{url_for('static', filename= 'images/skirt_steak_main.jpg')}}" alt="..." /></div>
+            <div class="col-md-6">
+                <div class="small mb-1">SKU: BST-498</div> <!--CAMBIAR!-->
+                <h1 class="display-5 fw-bolder">Skirt Steak (Entraña)</h1> <!--CAMBIAR!-->
+                <div class="fs-5 mb-5">
+                    {% if products %}
+                        <span>₡ {{ "{:,.2f}".format(products[0].base_cost_per_kilogram) }} por kilogramo</span>
+                    {% endif %}
+                </div>
+                <p class="lead"><strong>Forma sugerida de cocinar:</strong> Marinar con el marinado de preferencia. Puede ser un marinado simple compuesto de aceite de oliva, salsa de soya, jugo de limón, ajo rallado, pimentón ahumado y pimienta recién molida y dejar marinar por 2 horas. Remover el exceso de marinado y cocinar a temperatura alta a la parilla y rápido. Cuando se ven jugos salir de la carne, se le da vuelta y cuando se ven jugos salir nuevamente, se retira y se deja reposar por al menos 4 minutos.</p> 
+                <p class="lead"><strong>Otra forma de cocinar:</strong> Sellar a alta temperatura ya sea a la parilla o en un sartén hasta la temperatura deseada. Se le puede bañar con mantequilla y hierbas de preferencia.
+                {% if products %}
+                    <form method="post" action="{{ url_for('cart.add_to_cart') }}">
+                        <div class="d-flex">
+                            <select class="form-control text-center me-3" name="product_id" style="max-width: 17rem">
+                                {% for product in products %}
+                                    <option value="{{ product.id }}">{{ product.weight }} kg Precio total: ₡ {{ "{:,.2f}".format(product.total_cost) }}</option>
+                                {% endfor %}
+                            </select>
+
+                            <button type="submit" class="btn btn-outline-dark flex-shrink-0">
+                                <i class="bi-cart-fill me-1"></i>
+                                Añadir al carrito
+                            </button>
+                        </div>
+                    </form>
+            {% else %}
+                    <p>Lo sentimos, este producto no está disponible.</p>
+            {% endif %}
+            </div>
+        </div>
+    </div>
+</section>
+
+{%endblock%}

@@ -1,0 +1,91 @@
+{% extends "admin.html" %}
+
+{% block title %}Add Stock{% endblock %}
+
+{% block contents_store %}
+<style>
+    .table-container {
+        display: flex;
+        justify-content: center;
+        margin-top: 30px; /* Add space above the table */
+        margin-bottom: 30px; /* Add space below the table */
+    }
+    table {
+        width: 90%; /* Adjust this to change the table width */
+        border-collapse: collapse;
+        margin: auto; /* This will center the table */
+    }
+    th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: center; /* This centers the text */
+        min-height: 70px;
+    }
+    th {
+        background-color: #f2f2f2;
+        width: 20%; /* Adjust this to change the column width */
+    }
+    .submit-button {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+    }
+    
+</style>
+
+
+<div class="table-container">
+    <form method="POST" action="{{ url_for('views.update_stock') }}">
+        <table>
+            <thead>
+                <tr>
+                    <th>Nombre del Producto</th>
+                    <th>Peso</th>
+                    <th>Costo por kilogramo</th>
+                    <th>Costo total</th>
+                    <th>Cantidad</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for product in products %}
+                    <tr>
+                        <td>
+                            {% if product.name == 'skirt_steak' %}
+                                Skirt Steak (Entraña)
+
+                            {% elif product.name == 'ribeye' %}
+                                Ribeye
+
+                            {% elif product.name == 'picanha' %}
+                                Picaña (Punta de Solomo)
+
+                            {% elif product.name == 'tomahawk' %}
+                                Tomahawk
+
+                            {% elif product.name == 'nueva_york'%}
+                                Nueva York
+
+                            {% elif product.name == 't_bone' %}
+                                T Bone
+
+                            {% else %}
+                                {{ product.name }}
+                            {% endif %}
+                        </td>
+                        <td><strong>{{ product.weight }} kg </strong></td>
+                        <td>₡{{ "{:,.2f}".format(product.base_cost_per_kilogram) }}</td>
+                        <td>₡{{ "{:,.2f}".format(product.total_cost) }}</td>
+                        <td style="display: flex; justify-content: center;">
+                            <input type="hidden" name="product_id_{{ product.id }}" value="{{ product.id }}">
+                            <input type="number" id="quantity" name="new_quantity_{{ product.id }}" value="{{ product.quantity }}" style="text-align: center;">
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <div class="submit-button">
+            <input type="submit" value="Actualizar">
+        </div>
+    </form>
+</div>
+{% endblock %}

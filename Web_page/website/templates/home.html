@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% from "macros.html" import shop_item %}
+
+<title>{% block title %}Home- Carnes{% endblock %}</title>
+
+
+{% block contents_store %}
+
+<section class="py-5">
+            <div class="container px-4 px-lg-5 mt-5">
+                <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+                    {{ shop_item('ribeye', 'images/ribeye_shop.jpg', 'Ribeye (Lomo Alto)', '18,000.00', 'views.ribeye') }}
+                    {{ shop_item('t_bone', 'images/tbone_shop.jpg', 'T-Bone', '26,000.00', 'views.t_bone') }}
+                    {{ shop_item('nueva_york', 'images/nueva_york_shop.jpg', 'Nueva York', '16,000.00', 'views.nueva_york') }}
+                    {{ shop_item('skirt_steak', 'images/skirt_steak_shop.jpg', 'Skirt Steak (Entraña)', '12,000.00', 'views.skirt_steak') }}
+                    {{ shop_item('picanha', 'images/picanha_shop.jpg', 'Picaña (Punta de Solomo)', '28,000.00', 'views.picanha') }}
+                    {{ shop_item('tomahawk', 'images/tomahawk_shop.jpg', 'Tomahawk', '34,000.00', 'views.tomahawk') }}
+                </div>
+            </div>
+        </section>
+
+{% endblock %}
