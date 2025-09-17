@@ -7,7 +7,6 @@ import stripe
 
 stripe.api_key = 'sk_test_51OGBhdDSuppRFCsUlLBznFly2zODrIJ3xcwMnZJdaJjxfv52madMPX21CEzS6imZzwORxEMBlgiGemstl99w59H900gPMIhKg5'
 
-
 cart = Blueprint('cart', __name__)
 
 
